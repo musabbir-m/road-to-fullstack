@@ -1,0 +1,18 @@
+
+writeStream.on("error", (err)=>{
+     if(err){
+            throw Error ("Error", err)
+        }
+})
+
+// when readStrean is ended, we are ending the writeStream
+readStream.on("end", ()=>{
+    console.log("reading end")
+    writeStream.end
+})
+
+// when weriteStream finishes (we ended)
+
+writeStream.on("finish", ()=>{
+    console.log("written successfully")
+})
