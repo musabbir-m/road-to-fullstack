@@ -5,6 +5,6 @@ dotenv.config({path: path.join(process.cwd(), ".env") }) //we set the dir of the
 
 export default {
     node_env: process.env.NODE_ENV,
-    PORT: process.env.PORT, 
+    port: process.env.PORT, 
     database_url: process.env.DATABASE_URL // Fixed assignment to property syntax
 }

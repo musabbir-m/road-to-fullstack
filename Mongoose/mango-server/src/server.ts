@@ -1,28 +1,33 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import config from "./config"
+import config from "./config";
+import userRoute from "./modules/user/user.route";
 
-const app = express()
+const app = express();
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
-app.get("/", (req, res)=>{
-    res.send ("I am here on server")
-})
+app.use(userRoute);
 
-app.listen(5000, ()=>{
-    console.log("server running ")
-})
+app.get("/", (req, res) => {
+  res.send({
+    success: true,
+    message: "root of the server",
+  });
+});
 
-async function server (){
-    try {
-        await mongoose.connect(config.database_url as string)
+async function server() {
+  try {
+    await mongoose.connect(config.database_url as string);
 
-        console.log (` server running on port ${5000}`)
-        
-    } catch (error) {
-        console.log(` server error ${server}`)        
-    }
+    app.listen(config.port, () => {
+      console.log(` server running on port ${5000}`);
+    });
+  } catch (error) {
+    console.log(` server error ${error}`);
+  }
 }
+
+server();
