@@ -12,6 +12,19 @@ app.use(express.json()) //this will parse json data ex. we can get json ffrom po
 const filePath = path.join(__dirname, "../db/todo.json")
 
 
+const todosRouter = express.Router()
+
+app.use("/todos", todosRouter)
+
+todosRouter.get(("/all-todos"), (req: Request, res: Response) => {
+
+  console.log("From Tdodos router")
+  const data = fs.readFileSync(filePath, { encoding: "utf-8" })
+  res.json(data)
+})
+
+
+
 app.get("/", (req: Request, res: Response) => {
 
   res.send("Welcome to Todo")
@@ -26,7 +39,7 @@ console.log ("from param", req.params)
 
     const data = fs.readFileSync(filePath, { encoding: "utf-8" })
     res.json(data)
-  
+
 })
 
 app.post('/todos/create-todo', (req: Request, res: Response) => {

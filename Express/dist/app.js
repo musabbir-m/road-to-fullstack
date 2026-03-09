@@ -10,6 +10,13 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json()); //this will parse json data ex. we can get json ffrom post request
 //this is a parser as well, and a middleware as well (app.use (express.json() parser)
 const filePath = path_1.default.join(__dirname, "../db/todo.json");
+const todosRouter = express_1.default.Router();
+app.use("/todos", todosRouter);
+todosRouter.get(("/all-todos"), (req, res) => {
+    console.log("From Tdodos router");
+    const data = fs_1.default.readFileSync(filePath, { encoding: "utf-8" });
+    res.json(data);
+});
 app.get("/", (req, res) => {
     res.send("Welcome to Todo");
 });
