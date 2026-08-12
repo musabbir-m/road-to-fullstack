@@ -3,6 +3,6 @@ import { registerUser } from "./user.controller";
 
 const userRoute = Router();
 
-userRoute.post("/user", registerUser);
+userRoute.post("/", registerUser);
 
 export default userRoute;
